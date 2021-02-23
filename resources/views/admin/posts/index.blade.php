@@ -1,0 +1,55 @@
+@if(Auth::check())
+@section('content')
+<div class="card mb-3">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card-header">
+				<i class="fas fa-table"></i>
+				Table Posts
+			</div>
+			<a style="margin: 15px 15px 0 25px" class="btn btn-primary" href="../admin/posts/create" role="button">Thêm mới</a>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Content</th>
+						<th>Image</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach ($posts as $post)
+					<tr>
+						<td>{{$post->postid}}</td>
+						<td>{{$post->title}}</td>
+						<td>{{$post->content}}</td>
+						<td><img src="../source/image/post/{{$post->image}}" alt="Images" width="80px" height="50px"></td>
+						<td>
+							<a href='posts/{{$post->postid}}/edit'><i class="fas fa-edit"></i>Edit</a>
+						</td>
+						<td>
+							<form action="{{route('posts.destroy',[$post->postid])}}" method=post>
+								{{csrf_field()}}
+								{{method_field('DELETE')}}
+								<input type="submit" value="Delete" class="btn btn-danger" onClick= "return confirm('Ban co chac la muon
+								xoa ?');">
+							</form>
+						</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+@endsection
+@else
+@extends('layouts.admin')
+@endif
