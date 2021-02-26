@@ -26,7 +26,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $categories=Category::where('parent', 0)->get();
+        $categories=Category::where('parent', '<>', 0)->get();
         return view('admin.categories.create',['categories'=>$categories]);
     }
 
@@ -54,18 +54,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Edit the form for editing the specified resource.
      *
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
@@ -94,10 +83,7 @@ class CategoriesController extends Controller
             "public"=>$request->input('radioPublic'),
             "updated_at"=>Carbon::now('Asia/Ho_Chi_Minh')
         ]);
-// Màu đỏ là tên các cột trong bảng categories của CSDL
-// Màu xanh là giá trị thuộc tính name của các input trong form
-//Nếu thêm mới thành công thì quay lại form thêm gửi kèm theo thông báo
-        if ( $categoryUpdate)
+        if ($categoryUpdate)
         {
             return redirect()->back()->with("message", "Cập nhật thành công ");
         }
@@ -114,10 +100,8 @@ class CategoriesController extends Controller
     {
         if($category->delete())
         {
-            return redirect()->route('categories.index')->with('message', 'Category
-                deleted successfully');
+            return redirect()->route('categories.index')->with('message', 'Xóa thành công');
         }
-        return redirect()->route('categories.index')->with('message','Category deleted
-            error');
+        return redirect()->route('categories.index')->with('message','Không thể xóa, có lỗi');
     }
 }

@@ -54,7 +54,7 @@
 							<div class="cart-item">
 								<a class="cart-item-delete" href="{{route('xoagiohang',$product['item']['productid'])}}"><i class="fa fa-times"></i></a>
 								<div class="media">
-									<a class="pull-left" href="#"><img src="source/image/product/{{$product['item']['image']}}" alt=""></a>
+									<a class="pull-left" href="#"><img src="{{$product['item']['image']}}" alt=""></a>
 									<div class="media-body">
 										<span class="cart-item-title">{{$product['item']['productname']}}</span>
 										<span class="cart-item-amount">{{$product['qty']}}*<span>@if($product['item']['saleprice']) {{$product['item']['saleprice']}} @else {{$product['item']['price']}} @endif </span></span>
@@ -84,17 +84,18 @@
 			<div class="visible-xs clearfix"></div>
 			<nav class="main-menu">
 				<ul class="l-inline ov">
-					<li><a href="{{route('home')}}">Trang chủ</a></li>
-					<li><a href="">Loại sản phẩm</a>
+					<li><a href="{{route('home')}}" title="Trang chủ">Trang chủ</a></li>
+					<li><a href="" title="Loại sản phẩm">
+					Loại sản phẩm</a>
 						<ul class="sub-menu">
 							@foreach($loai_sp as $loai)
 							<li><a href="{{route('loaisanpham',$loai->catid)}}" title="{{$loai->catname}}">{{$loai->catname}}</a></li>
 							@endforeach
 						</ul>
 					</li>
-					<li><a href="{{route('gioithieu')}}">Giới thiệu</a></li>
-					<li><a href="{{route('tintuc')}}">Tin tức</a></li>
-					<li><a href="{{route('lienhe')}}">Liên hệ</a></li>
+					<li><a href="{{route('gioithieu')}}" title="Giới thiệu">Giới thiệu</a></li>
+					<li><a href="{{route('tintuc')}}" title="Tin tức">Tin tức</a></li>
+					<li><a href="{{route('lienhe')}}" title="Liên hệ">Liên hệ</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</nav>

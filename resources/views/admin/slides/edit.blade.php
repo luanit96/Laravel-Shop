@@ -1,6 +1,6 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
-<h2>FORM CẬP NHẬT SLIDES</h2>
 @if(session()->has('message'))
 <div class="alert alert-success">
 {{ session()->get('message') }}
@@ -32,7 +32,9 @@
 	<div class="form-group row">
 		<label for="inputImage" class="col-sm-2 col-form-label">Image</label>
 		<div class="col-sm-3">
-			<input type="file" class="form-control-file" name="inputImage" id="exampleFormControlFile1">
+			<input type="text" value="{{$slide->image}}" class="form-control-file" name="inputImage" id="ckfinder-input-1" required>
+			<img src="{{$slide->image}}" width="100%" id="input-img">
+			<button id="ckfinder-popup-1">Chọn ảnh</button>
 		</div>
 	</div>
 
@@ -44,6 +46,4 @@
 	</div>
 </form>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
             $loai_sp = Category::all();
             $view->with('loai_sp',$loai_sp);
         });
-       view()->composer(['header','home.dat_hang'],function($view){
+        view()->composer(['header','home.dat_hang'],function($view){
             if(Session('cart'))
             {
                 $oldCart = Session::get('cart');
@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
                 $view->with(['cart'=>Session::get('cart'), 'product_cart'=>$cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
             }
        });
-
     }
 
     /**

@@ -1,8 +1,14 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 <div class="card mb-3">
 	<div class="row">
 		<div class="col-md-12">
+			@if(session()->has('message'))
+			<div class="alert alert-success">
+				{{ session()->get('message') }}
+			</div>
+			@endif
 			<div class="card-header">
 				<i class="fas fa-table"></i>
 				Table Products
@@ -12,7 +18,7 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table id="dataTable" class="table table-bordered table-striped" width="100%" cellspacing="0">
+			<table id="dataTable" class="table table-bordered table-striped" width="100%" style="text-align: center" cellspacing="0">
 				<thead>
 					<tr>
 						<th>ProductID</th>
@@ -21,8 +27,7 @@
 						<th>Price</th>
 						<th>Sale Price</th>
 						<th>Image</th>
-						<th>Edit</th>
-						<th>Delete</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,16 +38,13 @@
 						<td>{{$product->productname}}</td>
 						<td>{{$product->price}}$</td>
 						<td>{{$product->saleprice}}$</td>
-						<td><img src="../source/image/product/{{$product->image}}" alt="Images" width="80px" height="50px"></td>
+						<td><img src="{{$product->image}}" alt="Images" width="100px" height="50px"></td>
 						<td>
 							<a href='products/{{$product->productid}}/edit'><i class="fas fa-edit"></i>Edit</a>
-						</td>
-						<td>
 							<form action="{{route('products.destroy',[$product->productid])}}" method=post>
 								{{csrf_field()}}
 								{{method_field('DELETE')}}
-								<input type="submit" class="btn btn-danger" value="Delete" onClick= "return confirm('Ban co chac la muon
-								xoa ?');">
+								<input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Bạn có chắc muốn xóa?')">
 							</form>
 						</td>
 					</tr>
@@ -51,9 +53,6 @@
 			</table>
 		</div>
 	</div>
-	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

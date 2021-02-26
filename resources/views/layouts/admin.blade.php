@@ -36,14 +36,7 @@
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
       </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="{{route('admin')}}" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,49 +70,49 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/categories') }}">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Categories</span>
+          <span>Loại sản phẩm</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/products') }}">
           <i class="fas fa-fw fa-table"></i>
-          <span>Products</span>
+          <span>Sản phẩm</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/slides') }}">
           <i class="fas fa-adjust"></i>
-          <span>Slides</span>
+          <span>Ảnh bìa</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/customers') }}">
           <i class="fas fa-address-book"></i>
-          <span>Customers</span>
+          <span>Khách hàng</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/users') }}">
           <i class="fas fa-allergies"></i>
-          <span>Users</span>
+          <span>Người dùng</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/bills') }}">
           <i class="fab fa-apple"></i>
-          <span>Bills</span>
+          <span>Đơn hàng</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ asset('admin/billdetails') }}">
          <i class="fas fa-apple-alt"></i>
-         <span>BillDetails</span>
+         <span>Chi tiết đơn hàng</span>
        </a>
      </li>
      <li class="nav-item">
       <a class="nav-link" href="{{ asset('admin/posts') }}">
         <i class="fas fa-fw fa-table"></i>
-        <span>Posts</span>
+        <span>Bài viết</span>
       </a>
     </li>
   </ul>
@@ -144,10 +137,10 @@
               <div class="card-body-icon">
                 <i class="fas fa-fw fa-comments"></i>
               </div>
-              <div class="mr-5">Categories</div>
+              <div class="mr-5">Loại sản phẩm</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="{{ asset('admin/categories') }}">
-              <span class="float-left">View Details</span>
+              <span class="float-left">Xem chi tiết</span>
               <span class="float-right">
                 <i class="fas fa-angle-right"></i>
               </span>
@@ -160,10 +153,10 @@
               <div class="card-body-icon">
                 <i class="fas fa-fw fa-list"></i>
               </div>
-              <div class="mr-5">Products</div>
+              <div class="mr-5">Sản phẩm</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="{{ asset('admin/products') }}">
-              <span class="float-left">View Details</span>
+              <span class="float-left">Xem chi tiết</span>
               <span class="float-right">
                 <i class="fas fa-angle-right"></i>
               </span>
@@ -176,10 +169,10 @@
               <div class="card-body-icon">
                 <i class="fas fa-fw fa-shopping-cart"></i>
               </div>
-              <div class="mr-5">Customers</div>
+              <div class="mr-5">Khách hàng</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="{{ asset('admin/customers') }}">
-              <span class="float-left">View Details</span>
+              <span class="float-left">Xem chi tiết</span>
               <span class="float-right">
                 <i class="fas fa-angle-right"></i>
               </span>
@@ -192,10 +185,10 @@
               <div class="card-body-icon">
                 <i class="fas fa-fw fa-life-ring"></i>
               </div>
-              <div class="mr-5">Slides</div>
+              <div class="mr-5">Ảnh bìa</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="{{ asset('admin/slides') }}">
-              <span class="float-left">View Details</span>
+              <span class="float-left">Xem chi tiết</span>
               <span class="float-right">
                 <i class="fas fa-angle-right"></i>
               </span>
@@ -210,7 +203,7 @@
     <footer class="sticky-footer">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Thiết kế bởi:Nguyễn Thành Luân</span>
+          <span>Design by Thành Luân</span>
         </div>
       </div>
     </footer>
@@ -261,13 +254,16 @@
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
 <script>
-  var button1 = document.getElementById( 'ckfinder-popup-1' );
+  var btnImage = document.getElementById('ckfinder-popup-1');
+  if(btnImage) {
+    btnImage.onclick = function() {
+      selectFileWithCKFinder('ckfinder-input-1', 'input-img');
+    };
+  }
 
-  button1.onclick = function() {
-    selectFileWithCKFinder( 'ckfinder-input-1' );
-  };
-
-  function selectFileWithCKFinder( elementId ) {
+  function selectFileWithCKFinder( elementId, imageId ) {
+    const inputImage = document.getElementById(elementId);
+    inputImage.value = '';
     CKFinder.popup( {
       chooseFiles: true,
       width: 800,
@@ -275,27 +271,30 @@
       onInit: function( finder ) {
         finder.on( 'files:choose', function( evt ) {
           var file = evt.data.files.first();
-          var output = document.getElementById( elementId );
+          var output = document.getElementById(elementId);
+          var elementImage = document.getElementById(imageId);
           output.value = file.getUrl();
+          elementImage.src = output.value;
         } );
 
         finder.on( 'file:choose:resizedImage', function( evt ) {
-          var output = document.getElementById( elementId );
+          var output = document.getElementById(elementId);
           output.value = evt.data.resizedUrl;
         } );
       }
-    } );
+    });
   }
-</script>
-<script>
+
+  //import ckfinder to ckeditor
   CKEDITOR.replace( 'ckeditor', {
-    filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
-    filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
-    filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
-    filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-    filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-    filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+    filebrowserBrowseUrl: '{{ asset('/ckfinder/ckfinder.html') }}',
+    filebrowserImageBrowseUrl: '{{ asset('/ckfinder/ckfinder.html?Type=Images') }}',
+    filebrowserUploadUrl: '{{ asset('/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+    filebrowserImageUploadUrl: '{{ asset('/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+    filebrowserWindowWidth : '1000',
+    filebrowserWindowHeight : '700'
   } );
+
 </script>
 </body>
 </html>

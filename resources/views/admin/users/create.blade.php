@@ -1,4 +1,5 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 @if(session()->has('message'))
 <div class="alert alert-success">
@@ -61,6 +62,4 @@
 	</div>
 </form>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

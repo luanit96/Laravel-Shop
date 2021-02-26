@@ -1,8 +1,14 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 <div class="card mb-3">
 	<div class="row">
 		<div class="col-md-12">
+			@if(session()->has('message'))
+			<div class="alert alert-success">
+			{{ session()->get('message') }}
+			</div>
+			@endif
 			<div class="card-header">
 				<i class="fas fa-table"></i>
 				Table Categories
@@ -12,7 +18,7 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+			<table style="text-align: center" class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
 						<th>CatID</th>
@@ -21,8 +27,7 @@
 						<th>OrderItem</th>
 						<th>HasChild</th>
 						<th>Public</th>
-						<th>Edit</th>
-						<th>Delete</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -36,13 +41,10 @@
 						<td>{{$category->public}}</td>
 						<td>
 							<a href='categories/{{$category->catid}}/edit'><i class="fas fa-edit"></i>Edit</a>
-						</td>
-						<td>
 							<form action="{{route('categories.destroy',[$category->catid])}}" method=post>
 								{{csrf_field()}}
 								{{method_field('DELETE')}}
-								<input type="submit" value="Delete" class="btn btn-danger"onClick= "return confirm('Ban co chac la muon
-								xoa ?');">
+								<input type="submit" value="Delete" class="btn btn-danger"onclick="return confirm('Bạn có chắc muốn xóa?')">
 							</form>
 						</td>
 					</tr>
@@ -51,9 +53,6 @@
 			</table>
 		</div>
 	</div>
-	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

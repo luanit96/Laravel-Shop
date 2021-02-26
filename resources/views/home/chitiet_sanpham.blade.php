@@ -21,7 +21,7 @@
 
 				<div class="row">
 					<div class="col-sm-4">
-						<img src="source/image/product/{{$sanpham->image}}" alt="">
+						<img src="{{$sanpham->image}}" alt="{{$sanpham->productname}}">
 					</div>
 					<div class="col-sm-8">
 						<div class="single-item-body">
@@ -40,10 +40,6 @@
 
 						<div class="clearfix"></div>
 						<div class="space20">&nbsp;</div>
-
-						<div class="single-item-desc">
-							<p>{{$sanpham->detail}}</p>
-						</div>
 						<div class="space20">&nbsp;</div>
 
 						<p>Số lượng:</p>
@@ -69,7 +65,7 @@
 					</ul>
 
 					<div class="panel" id="tab-description">
-						<p>{{$sanpham->detail}}</p>
+						{!! $sanpham->detail !!}
 					</div>
 				</div>
 				<div class="space50">&nbsp;</div>
@@ -84,7 +80,7 @@
 								<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 								@endif
 								<div class="single-item-header">
-									<a href="{{route('chitietsanpham',$sptt->productid)}}"><img src="source/image/product/{{$sptt->image}}" alt="" height="250px"></a>
+									<a href="{{route('chitietsanpham',$sptt->productid)}}"><img src="{{$sptt->image}}" alt="{{$sptt->productname}}" height="250px"></a>
 								</div>
 								<div class="single-item-body">
 									<p class="single-item-title">{{$sptt->productname}}</p>

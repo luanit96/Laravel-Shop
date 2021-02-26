@@ -1,4 +1,5 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 @if(session()->has('message'))
 <div class="alert alert-success">
@@ -23,7 +24,6 @@
 		<label for="selectParent" class="col-sm-2 col-form-label">Parent</label>
 		<div class="col-sm-10">
 			<select class="custom-select" name="selectParent" required id="selectParent">
-				<option value="0" selected>0</option>
 				@foreach($categories as $category)
 				<option value="{{$category->catid}}">{{$category->catname}}</option>
 				@endforeach
@@ -34,7 +34,7 @@
 	<div class="form-group row">
 		<label for="inputOrderItem" class="col-sm-2 col-form-label">Order Item</label>
 		<div class="col-sm-10">
-			<input type="number" class="form-control" name="inputOrderItem" id="inputOrderItem" placeholder="1">
+			<input type="number" class="form-control" name="inputOrderItem" min="1" max="3" id="inputOrderItem" placeholder="1">
 		</div>
 	</div>
 
@@ -46,7 +46,7 @@
 					<label class="radio-inline"><input type="radio" name="radioPublic" value="1" checked>Yes</label>
 				</div>
 				<div class="form-check">
-					<label class="radio-inline"><input type="radio" name="radioPublic" value="0" checked>No</label>
+					<label class="radio-inline"><input type="radio" name="radioPublic" value="0">No</label>
 				</div>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 					<label class="radio-inline"><input type="radio" name="radioHasChild" value="1" checked>Yes</label>
 				</div>
 				<div class="form-check">
-					<label class="radio-inline"><input type="radio" name="radioHasChild" value="0" checked>No</label>
+					<label class="radio-inline"><input type="radio" name="radioHasChild" value="0">No</label>
 				</div>
 			</div>
 		</div>
@@ -72,6 +72,4 @@
 	</div>
 </form>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

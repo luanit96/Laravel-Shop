@@ -60,7 +60,7 @@
 </div> <!-- #footer -->
 <div class="copyright">
 	<div class="container">
-		<p class="pull-left">Thiết kế bởi:Nguyễn Thành Luân</p>
+		<p class="pull-left">Design by Thành Luân</p>
 		<p class="pull-right pay-options">
 			<i class="fa fa-facebook-square"></i>
 			<i class="fa fa-twitter-square"></i>

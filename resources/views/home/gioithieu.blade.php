@@ -18,13 +18,13 @@
 		<div class="our-history">
 			<div class="history-slider">
 				<div class="history-navigation">
-					<a data-slide-index="0" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2013</span></a>
-					<a data-slide-index="1" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2014</span></a>
-					<a data-slide-index="2" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2015</span></a>
-					<a data-slide-index="3" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2016</span></a>
-					<a data-slide-index="4" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2017</span></a>
-					<a data-slide-index="5" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2018</span></a>
-					<a data-slide-index="6" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2019</span></a>
+					<a data-slide-index="0" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">1</span></a>
+					<a data-slide-index="1" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">2</span></a>
+					<a data-slide-index="2" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">3</span></a>
+					<a data-slide-index="3" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">4</span></a>
+					<a data-slide-index="4" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">5</span></a>
+					<a data-slide-index="5" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">6</span></a>
+					<a data-slide-index="6" href="blog_with_2sidebars_type_e.html" class="circle"><span class="auto-center">7</span></a>
 				</div>
 
 				<div class="history-slides">
@@ -32,12 +32,12 @@
 					<div> 
 						<div class="row">
 							<div class="col-sm-5">
-								<img src="source/image/introduce/{{$introduce->image}}" width="470px" height="320px" alt="Image">
+								<img src="{{$introduce->image}}" width="470px" height="320px" alt="{{$introduce->title}}">
 							</div>
 							<div class="col-sm-7">
 								<h5 class="other-title">{{$introduce->title}}</h5>
 								<div class="space20">&nbsp;</div>
-								<p>{{$introduce->content}}</p>
+								{!!$introduce->content!!}
 							</div>
 						</div> 
 					</div>

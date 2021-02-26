@@ -46,26 +46,15 @@ class ProductsController extends Controller
             "detail"=>$request->input('inputDetail'),
             "price"=>$request->input('inputPrice'),
             "saleprice"=>$request->input('inputSaleprice'),
-            "views"=>$request->input('inputViews'),
+            "views"=>1,
             "public"=>$request->input('radioPublic'),
             "created_at"=>Carbon::now('Asia/Ho_Chi_Minh')
         ]);
-        if ($product)
+        if ($product->exists)
         {
             return redirect()->back()->with("message", "Thêm mới thành công");
         }
         return back()->withInput()->with("message", "Không thể thêm mới, có lỗi");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(product $product)
-    {
-        //
     }
 
     /**
@@ -98,14 +87,11 @@ class ProductsController extends Controller
             "detail"=>$request->input('inputDetail'),
             "price"=>$request->input('inputPrice'),
             "saleprice"=>$request->input('inputSaleprice'),
-            "views"=>$request->input('inputViews'),
+            "views"=>1,
             "public"=>$request->input('radioPublic'),
             "updated_at"=>Carbon::now('Asia/Ho_Chi_Minh')
         ]);
-// Màu đỏ là tên các cột trong bảng categories của CSDL
-// Màu xanh là giá trị thuộc tính name của các input trong form
-//Nếu thêm mới thành công thì quay lại form thêm gửi kèm theo thông báo
-        if ($productUpdate)
+        if($productUpdate)
         {
             return redirect()->back()->with("message", "Cập nhật thành công ");
         }
@@ -122,10 +108,8 @@ class ProductsController extends Controller
     {
         if($product->delete())
         {
-            return redirect()->route('products.index')->with('message', 'product
-                deleted successfully');     
+            return redirect()->route('products.index')->with('message', 'Xóa thành công');     
         }
-        return redirect()->route('products.index')->with('message','product deleted
-            error');
+        return redirect()->route('products.index')->with('message','Không thể xóa, có lỗi');
     }
 }

@@ -1,4 +1,5 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 <div class="card mb-3">
 	<div class="card-header">
@@ -7,13 +8,13 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+			<table style="text-align: center" class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
 						<th>ID</th>
 						<th>CustomerID</th>
-						<th>total</th>
-						<th>payment</th>
+						<th>Total</th>
+						<th>Payment</th>
 						<th>Note</th>
 					</tr>
 				</thead>
@@ -31,9 +32,6 @@
 			</table>
 		</div>
 	</div>
-	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

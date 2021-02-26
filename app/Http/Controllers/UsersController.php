@@ -24,7 +24,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        $confirmpass =$request->input('inputConfirmPassword');
+        $confirmpass = $request->input('inputConfirmPassword');
         $password = $request->input('inputPassword');
         if($confirmpass != $password) {
             return redirect()->back()->with("message", "Mật khẩu không khớp");

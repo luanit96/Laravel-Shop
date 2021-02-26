@@ -71,7 +71,7 @@
 									@foreach($product_cart as $cart)
 									<!--  one item	 -->
 									<div class="media">
-										<img width="25%" src="source/image/product/{{$cart['item']['image']}}" alt="" class="pull-left">
+										<img width="25%" src="{{$cart['item']['image']}}" alt="" class="pull-left">
 										<div class="media-body">
 											<p class="font-large">{{$cart['item']['productname']}}</p>
 											<p class="font-large">Số lượng: {{$cart['qty']}}</p>

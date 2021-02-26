@@ -1,8 +1,14 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 <div class="card mb-3">
 	<div class="row">
 		<div class="col-md-12">
+			@if(session()->has('message'))
+			<div class="alert alert-success">
+			{{ session()->get('message') }}
+			</div>
+			@endif
 			<div class="card-header">
 				<i class="fas fa-table"></i>
 				Table Slides
@@ -12,15 +18,14 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+			<table style="text-align: center" class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
 						<th>ID</th>
 						<th>SlideName</th>
 						<th>Link</th>
 						<th>Image</th>
-						<th>Edit</th>
-						<th>Delete</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -29,16 +34,13 @@
 						<td>{{$slide->slideid}}</td>
 						<td>{{$slide->slidename}}</td>
 						<td>{{$slide->link}}</td>
-						<td><img src="../source/image/slide/{{$slide->image}}" alt="Images" width="150px" height="80px"></td>
+						<td><img src="{{$slide->image}}" alt="{{$slide->slidename}}" width="200px" height="80px"></td>
 						<td>
 							<a href='slides/{{$slide->slideid}}/edit'><i class="fas fa-edit"></i>Edit</a>
-						</td>
-						<td>
 							<form action="{{route('slides.destroy',[$slide->slideid])}}" method=post>
 								{{csrf_field()}}
 								{{method_field('DELETE')}}
-								<input type="submit" class="btn btn-danger" value="Delete" onClick= "return confirm('Ban co chac la muon
-								xoa ?');">
+								<input type="submit" class="btn btn-danger" value="Delete" onclick= "return confirm('Bạn có chắc muốn xóa?')">
 							</form>
 						</td>
 					</tr>
@@ -47,9 +49,6 @@
 			</table>
 		</div>
 	</div>
-	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

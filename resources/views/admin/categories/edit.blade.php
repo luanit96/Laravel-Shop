@@ -1,4 +1,5 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->access === 1) 
+@extends('layouts.admin')
 @section('content')
 @if(session()->has('message'))
 <div class="alert alert-success">
@@ -39,7 +40,7 @@
 	<div class="form-group row">
 		<label for="inputOrderItem" class="col-sm-2 col-form-label">Order Item</label>
 		<div class="col-sm-10">
-			<input type="number" class="form-control" name="inputOrderItem" id="inputOrderItem" value="{{$category->orderitem}}" placeholder="1">
+			<input type="number" class="form-control" name="inputOrderItem" min="1" max="3" id="inputOrderItem" value="{{$category->orderitem}}" placeholder="1">
 		</div>
 	</div>
 
@@ -77,6 +78,4 @@
 	</div>
 </form>
 @endsection
-@else
-@extends('layouts.admin')
 @endif

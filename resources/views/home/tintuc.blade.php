@@ -18,11 +18,12 @@
 		@foreach($posts as $post)
 		<div class="row">
 			<div class="col-md-3">
-				<img class="mr-3" src="source/image/post/{{$post->image}}" alt="Generic placeholder image">
+				<img class="mr-3" src="{{$post->image}}" alt="{{$post->title}}">
 			</div>
 			<div class="col-md-9">
 				<h5 class="mt-0 mb-1">{{$post->title}}</h5>
-				<p>{{$post->content}}</p>
+				<div class="space20">&nbsp;</div>
+				{!!$post->content!!}
 			</div>
 		</div>
 		@endforeach

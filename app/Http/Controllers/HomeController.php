@@ -27,11 +27,17 @@ class HomeController extends Controller
     public function index()
     {
         $slide = Slide::all();
-        $new_product=Product::where('views',1)->oldest()->paginate(4);
-        $sale_product=Product::where('saleprice','<>',0)->paginate(8);
+        $new_product=Product::where('views',1)->orderBy('created_at', 'DESC')->oldest()->paginate(4);
+        $sale_product=Product::where('saleprice','<>',0)->paginate(12);
         return view('home.index',compact('slide','new_product','sale_product'));
     }
 
+    /**
+     * getLoaiSp the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getLoaiSp($catid)
     {
         $sp_theoloai = Product::where('catid',$catid)->get();
@@ -41,6 +47,12 @@ class HomeController extends Controller
         return view('home.loai_sanpham',compact('sp_theoloai','sp_khac','loai','loai_sp'));
     }
 
+    /**
+     * getChitiet the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getChitiet(Request $req)
     {
         $sanpham=Product::where('productid',$req->productid)->first();
@@ -48,23 +60,47 @@ class HomeController extends Controller
         return view('home.chitiet_sanpham',compact('sanpham','sp_tuongtu'));
     }
 
+    /**
+     * getGioiThieu the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getGioiThieu()
     {
         $introdures = Introduce::All();
         return view('home.gioithieu',compact('introdures'));
     }
 
+    /**
+     * getTinTuc the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getTinTuc()
     {
         $posts = Post::first()->paginate(5);
         return view('home.tintuc',compact('posts'));
     }
 
+    /**
+     * getLienHe the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getLienHe()
     {
         return view('home.lienhe');
     }
 
+    /**
+     * postLienHe the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function postLienHe(Request $req)
     {
         $this->validate($req,
@@ -90,6 +126,12 @@ class HomeController extends Controller
         return redirect()->back()->with('thanhcong','Liên hệ thành công');
     }
 
+    /**
+     * getAddtoCart the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getAddtoCart(Request $req,$productid)
     {
         if(Auth::user()) {
@@ -104,6 +146,12 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     * getDeletetoCart the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getDeletetoCart($productid)
     {
         $oldCart = Session::has('cart')?Session::get('cart'):null;
@@ -113,10 +161,22 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * getCheckout the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getCheckout() {
         return view('home.dat_hang');
     }
 
+    /**
+     * postCheckout the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function postCheckout(Request $req)
     {
         $cart = Session::get('cart');
@@ -149,47 +209,16 @@ class HomeController extends Controller
         Session::forget('cart');
         return redirect()->back()->with('thongbao','Đặt hàng thành công');  
     }
-
+    /**
+     * getSearch the form for editing the specified resource.
+     *
+     * @param  \App\product  $product
+     * @return \Illuminate\Http\Response
+    */
     public function getSearch(Request $req)
     {
         $keyWord = $req->key;
         $product = Product::where('productname','like','%'.$keyWord.'%')->orWhere('price',$keyWord)->get();
         return view('home.search',compact('product', 'keyWord'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-       //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
 }

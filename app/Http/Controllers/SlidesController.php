@@ -52,18 +52,7 @@ class SlidesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(slide $slide)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Edit the form for editing the specified resource.
      *
      * @param  \App\product  $product
      * @return \Illuminate\Http\Response
@@ -90,9 +79,6 @@ class SlidesController extends Controller
             "image"=>$request->input('inputImage'),
             "updated_at"=>Carbon::now('Asia/Ho_Chi_Minh')
         ]);
-// Màu đỏ là tên các cột trong bảng categories của CSDL
-// Màu xanh là giá trị thuộc tính name của các input trong form
-//Nếu thêm mới thành công thì quay lại form thêm gửi kèm theo thông báo
         if ($slidesUpdate)
         {
             return redirect()->back()->with("message", "Cập nhật thành công ");
@@ -110,10 +96,8 @@ class SlidesController extends Controller
     {
         if($slide->delete())
         {
-            return redirect()->route('slides.index')->with('message', 'slide
-                deleted successfully');     
+            return redirect()->route('slides.index')->with('message', 'Xóa thành công');     
         }
-        return redirect()->route('slides.index')->with('message','slide deleted
-            error');
+        return redirect()->route('slides.index')->with('message','Không thể xóa, có lỗi');
     }
 }
